@@ -76,3 +76,66 @@ The following validations are performed on the request body:
 - `email`: Must be a valid email format.
 - `fullname.firstname`: Must be at least 3 characters long.
 - `password`: Must be at least 6 characters long.
+
+# User Login API Documentation
+
+## POST /users/login
+
+Authenticates existing user and returns JWT token.
+
+### Request Body Example
+```json
+{
+    "email": "john@example.com",  // required, valid email
+    "password": "secret123"       // required, min 6 chars
+}
+```
+
+### Success Response Example
+
+**Status Code**: 200 OK
+
+```json
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "user": {
+        "_id": "65f1a2b3c4d5e6f7g8h9i0",
+        "fullname": {
+            "firstname": "John",
+            "lastname": "Doe"
+        },
+        "email": "john@example.com"
+    }
+}
+```
+
+### Error Response Examples
+
+**Status Code**: 400 Bad Request
+```json
+{
+    "errors": [
+        {
+            "msg": "Invalid Email",
+            "param": "email",
+            "location": "body"
+        }
+    ]
+}
+```
+
+**Status Code**: 401 Unauthorized
+```json
+{
+    "message": "Invalid email or password"
+}
+```
+
+### Validation Rules
+- Email must be valid format
+- Password minimum 6 characters
+- Both email and password are required fields
+
+### Security
+- Password is compared using bcrypt
+- JWT token returned for authentication
