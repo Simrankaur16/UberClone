@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
 const app = express();
+const cookieParser = require('cookie-parser');
 const cors = require('cors')
 const connectToDB = require('./db/db')
 const userRoutes = require('./routes/userRoutes')
@@ -17,5 +18,6 @@ app.get('/', (req, res) => {
 });
 
 app.use('/users', userRoutes)
+app.use(cookieParser());
 
 module.exports  = app;
