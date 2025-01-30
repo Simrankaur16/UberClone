@@ -139,3 +139,74 @@ Authenticates existing user and returns JWT token.
 ### Security
 - Password is compared using bcrypt
 - JWT token returned for authentication
+
+# User Profile and Logout Endpoints Documentation
+
+## GET /users/profile
+
+### Description
+Retrieves the profile information of the authenticated user.
+
+### Authentication
+Requires a valid JWT token in the Authorization header or cookie.
+
+### Response
+
+#### Success
+- **Status Code**: `200 OK`
+- **Body**: JSON object containing user information
+    ```json
+    {
+        "_id": "user-id",
+        "fullname": {
+            "firstname": "John",
+            "lastname": "Doe"
+        },
+        "email": "john.doe@example.com"
+    }
+    ```
+
+#### Error
+- **Status Code**: `401 Unauthorized`
+- **Body**:
+    ```json
+    {
+        "message": "Unauthorized"
+    }
+    ```
+
+## GET /users/logout
+
+### Description
+Logs out the current user by invalidating their token and clearing the cookie.
+
+### Authentication
+Requires a valid JWT token in the Authorization header or cookie.
+
+### Response
+
+#### Success
+- **Status Code**: `200 OK`
+- **Body**:
+    ```json
+    {
+        "message": "Logout successfully"
+    }
+    ```
+
+### SFeatures
+- Adds the token to a blacklist to prevent reuse
+- Invalidates current session
+
+#### Error
+- **Status Code**: `401 Unauthorized`
+- **Body**:
+    ```json
+    {
+        "message": "Unauthorized"
+    }
+    ```
+
+### Notes
+- The token is added to a blacklist to prevent its reuse after logout
+- Both cookie-based and header-based token authentication are supported
