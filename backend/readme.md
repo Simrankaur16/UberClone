@@ -251,3 +251,43 @@ The request body should be a JSON object containing the following fields:
 
 
 
+## Captain Authentication Routes
+
+### Login Captain
+- **Endpoint**: POST /captain/login
+- **Description**: Authenticates a captain and generates an authentication token
+- **Request Body**:
+    - `email` (string): Captain's email address
+    - `password` (string): Captain's password
+- **Validation**:
+    - Email must be valid
+    - Password must be at least 6 characters long
+- **Response**:
+    - `200`: Returns captain data and authentication token
+    - `400`: Invalid credentials or validation errors
+
+### Get Captain Profile
+- **Endpoint**: GET /captain/profile
+- **Description**: Retrieves the authenticated captain's profile information
+- **Authentication**: Required (Bearer token)
+- **Response**:
+    - `200`: Returns captain profile data
+    - `401`: Unauthorized access
+
+### Logout Captain
+- **Endpoint**: GET /captain/logout
+- **Description**: Logs out the captain by invalidating the current token
+- **Authentication**: Required (Bearer token)
+- **Process**:
+    - Adds the current token to blacklist
+    - Clears authentication cookie
+- **Response**:
+    - `200`: Successful logout message
+    - `401`: Unauthorized access
+
+### Authentication Details
+- Token can be provided via:
+    - HTTP Authorization header (Bearer token)
+    - Cookie named 'token'
+- Blacklisted tokens cannot be reused for authentication
+
