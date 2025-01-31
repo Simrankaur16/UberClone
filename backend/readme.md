@@ -210,3 +210,44 @@ Requires a valid JWT token in the Authorization header or cookie.
 ### Notes
 - The token is added to a blacklist to prevent its reuse after logout
 - Both cookie-based and header-based token authentication are supported
+
+
+# Captain Registration Endpoint Documentation
+
+## Endpoint
+`POST /captains/register`
+
+## Description
+This endpoint registers a new captain with their vehicle information. It validates the input data and creates a new captain account in the system.
+
+## Request Body
+The request body should be a JSON object containing the following fields:
+
+- `fullname`: An object containing the captain's name information
+    - `firstname` (string, required): Captain's first name, minimum 3 characters
+    - `lastname` (string, optional): Captain's last name
+- `email` (string, required): Captain's email address, must be valid email format
+- `password` (string, required): Password for the account, minimum 6 characters
+- `vehicle`: An object containing vehicle information
+    - `color` (string, required): Vehicle color, minimum 3 characters
+    - `plate` (string, required): Vehicle plate number, minimum 3 characters
+    - `capacity` (integer, required): Vehicle capacity, minimum value of 1
+    - `vehicleType` (string, required): Type of vehicle, must be either 'car' or 'motorcycle'
+
+### Expample Response
+
+
+- `captain` (object):
+ -`fullname` (string).
+  -`firstname` (string) : User last name ( minimum 3 characters)
+  -`lastlname` (string) : User last name ( minimum 3 characters)
+-`email` (string): User's email address (must be a valid email)
+- `vehicle` (object)
+ -`color` (string) vehicle color
+ -`capacity` (number) vehicle capacity
+ -`vehicleType` (String) vehicle type
+ -`plate` (string) vehicle number plate
+
+
+
+
