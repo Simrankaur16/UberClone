@@ -1,9 +1,61 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-const CaptainLogin = () => {
+const CaptainSignUp = () => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [captianData, setCaptianData] = useState({})
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+
+        setCaptianData({
+            email:email, 
+            password:password
+        })
+        console.log(captianData)
+
+        setEmail('')
+        setPassword('')
+    }
+
+    
   return (
-    <div>CaptainLogin</div>
+    <div className='p-7 flex flex-col h-screen justify-between'>
+        <div>
+        <img  className="w-16 pb-6"   src="https://www.svgrepo.com/show/505031/uber-driver.svg" alt='logo'/>
+
+        <form onSubmit={(e)=>submitHandler(e)} className='bg-white p-7 rounded-lg shadow-md'>
+            <h3 className='text-lg font-medium mb-2'>What's your email</h3>
+            <input className='bg-[#eeeeee] mb-7 rounded px-4 py-2  w-full text-lg placeholder:text-base'
+                 type="email" 
+                 value={email}
+                 onChange={(e) => setEmail(e.target.value)}
+                 placeholder="email@example.com" 
+                 required/>
+
+            <h3 className='text-lg font-medium mb-2'>Enter Password</h3>
+            <input
+                className='bg-[#eeeeee] mb-7 rounded px-4 py-2 w-full text-lg placeholder:text-base'
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password" 
+                required/>  
+            <button className='bg-black text-white w-full py-2 mb-5 font-semibold rounded text-lg px-4' >Login</button>  
+            <p className='mb-2 '> New Captain? <Link to="/captain-signup" className="text-blue-600">Create New Account</Link>
+            </p>
+        </form>
+        </div>
+        <div>
+        <Link to='/login' className='bg-[#3e8670] flex items-center justify-center text-white w-full py-2 mb-7 font-semibold rounded text-lg px-4' >
+            Sign in as User</Link>  
+
+        </div>
+    </div>
+
+    
   )
 }
 
-export default CaptainLogin
+export default CaptainSignUp
