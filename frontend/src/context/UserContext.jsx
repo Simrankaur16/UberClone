@@ -1,4 +1,4 @@
-import React, { useSyncExternalStore } from 'react'
+import React, { createContext, useState} from 'react'
 
 export const UserDataContext = createContext()
 
@@ -14,9 +14,9 @@ const UserContext = ({children}) => {
     
   return (
     <div>
-        <UserContext.Provider value={user}>
+        <UserDataContext.Provider value={{user, setuser}}>
             {children}
-        </UserContext.Provider>
+        </UserDataContext.Provider>
     </div>
     
   )

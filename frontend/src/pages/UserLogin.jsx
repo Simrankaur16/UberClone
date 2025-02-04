@@ -1,16 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { use } from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { UserDataContext } from '../context/UserContext'
 
 const UserLogin = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [userData, setUserData] = useState({})
+    const {user, setUser} = useContext(UserDataContext)
+    const navigate = useNavigate()
 
     const submitHandler = (e) => {
         e.preventDefault();
 
-        setUserData({
+        con({
             email:email, 
             password:password
         })
