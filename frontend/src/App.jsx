@@ -9,6 +9,7 @@ import UserSignUp from './pages/UserSignUp'
 import Home from './pages/Home'
 import UserProtectedWrapper from './pages/UserProtectedWrapper'
 import UserLogout from './pages/UserLogout'
+import CaptianHome from './pages/CaptianHome'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -26,10 +27,13 @@ function App() {
             <Home/>
           </UserProtectedWrapper>
           }/>
-          <Route path='/user/logout' element=
+        <Route path='/user/logout' element=
           {<UserProtectedWrapper>
             <UserLogout/>
           </UserProtectedWrapper>}/>
+        <Route path='/captian-home'  element={<CaptianHome/>} />
+
+        
       </Routes>
     </div>
     
