@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import { use } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { UserDataContext } from '../context/UserContext'
@@ -14,7 +13,7 @@ const UserLogin = () => {
     const submitHandler = (e) => {
         e.preventDefault();
 
-        con({
+        const newUser =({
             email:email, 
             password:password
         })

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'  //useNavigate is hook to navigate between pages
 import axios from 'axios'
 import {UserDataContext} from '../context/UserContext'
@@ -14,7 +14,7 @@ const UserSignUp = () => {
 
   const navigate = useNavigate()
 
-  const {user, setUser} = React.useContext(UserDataContext)
+  const {user, setUser} = useContext(UserDataContext)
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -29,22 +29,26 @@ const UserSignUp = () => {
     }
 
     const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`, newUser)
+    console.log(response)
 
     if(response.status === 201){
       const data = response.data;
 
       setUser(data.user)
-      console.log(data)
+      
+      console.log("user Created")
       localStorage.setItem('token', data.token)
       navigate('/home')
 
     }
     
-    // setEmail('')
-    // setFirstName('')
-    // setLastname('')
-    // setPassword('')
+    setEmail('')
+    setFirstName('')
+    setLastname('')
+    setPassword('')
   }
+
+
   return (
 
     <div className='p-7 flex flex-col h-screen justify-between'>

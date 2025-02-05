@@ -35,7 +35,7 @@ module.exports.registerCaptain = async(req,res,next)=> {
     const token = captain.generateAuthToken();
 
     // return tokena and captain data
-    res.status(200).json({token, captain})
+   return  res.status(200).json({token, captain})
 
 
 }
