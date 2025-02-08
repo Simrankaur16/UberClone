@@ -2,18 +2,18 @@ import React, {createContext, useState, useContext} from 'react'
 
 export const CaptainDataContext = createContext();
 
-const CaptianContext = ({children}) => {
-    const [captian, setCaptian] = useState(null);
+const CaptainContext = ({children}) => {
+    const [captain, setCaptain] = useState(null);
     const [ isLoading, setIsLoading ] = useState(false);
     const [ error, setError ] = useState(null);
 
     const updateCaptian = (captainData) =>{
-        setCaptian(captainData)
+        setCaptain(captainData)
     }
 
     const value = {
-        captian,
-        setCaptian,
+        captain,
+        setCaptain, 
         isLoading,
         setIsLoading,
         error
@@ -29,4 +29,4 @@ const CaptianContext = ({children}) => {
   )
 }
 
-export default CaptianContext
+export default CaptainContext

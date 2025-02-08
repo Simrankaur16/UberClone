@@ -16,7 +16,7 @@ const CaptainSignUp = () => {
     const [vehicleCapacity, setVehicleCapacity] = useState('')
     const [vehicleType, setVehicleType] = useState('')
 
-    const {captian, setCaptian} = useContext(CaptainDataContext)
+    const {captain, setCaptain} = useContext(CaptainDataContext)
     const navigate = useNavigate();
   
     const submitHandler = async (e) => {
@@ -36,25 +36,27 @@ const CaptainSignUp = () => {
         }
   
       }
+      
+      console.log(captainData)
 
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captain/register`, captainData)
 
       if(response.status === 201){
         const data = response.data;
-        setCaptian(data.captain)
+        setCaptain(data.captain)
         localStorage.setItem('token', data.token)
         navigate('/captian-home')
 
       }
       
-      setEmail('')
-      setFirstName('')
-      setLastname('')
-      setPassword('')
-      setVehicleCapacity('')
-      setVehicleColor('')
-      setVehiclePlate('')
-      setVehicleType('')
+      // setEmail('')
+      // setFirstName('')
+      // setLastname('')
+      // setPassword('')
+      // setVehicleCapacity('')
+      // setVehicleColor('')
+      // setVehiclePlate('')
+      // setVehicleType('')
     }
 
 
