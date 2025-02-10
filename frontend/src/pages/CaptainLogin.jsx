@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { CaptainDataContext } from '../context/CaptianContext'
+import { CaptainDataContext } from '../context/CaptainContext'
 
 
 
@@ -22,7 +22,7 @@ const CaptainSignUp = () => {
             email:email, 
             password:password
         }
-        console.log(captain)
+        
 
         const response = await  axios.post(`${import.meta.env.VITE_BASE_URL}/captain/login`,captain)
 

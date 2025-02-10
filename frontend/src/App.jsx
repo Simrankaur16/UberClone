@@ -11,6 +11,7 @@ import UserProtectedWrapper from './pages/UserProtectedWrapper'
 import UserLogout from './pages/UserLogout'
 import CaptianHome from './pages/CaptianHome'
 import CaptainProtectWrapper from './pages/CaptainProtectWrapper'
+import CaptainLogout from './pages/CaptainLogout'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -38,6 +39,13 @@ function App() {
         {<CaptainProtectWrapper>
            <CaptianHome/>
         </CaptainProtectWrapper>} />
+
+        <Route path='/captain/logout' element= 
+        {
+          <CaptainProtectWrapper>
+            <CaptainLogout/>
+          </CaptainProtectWrapper>
+        } />
 
         
       </Routes>

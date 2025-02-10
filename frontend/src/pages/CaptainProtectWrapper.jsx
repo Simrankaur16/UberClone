@@ -1,7 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
-import { CaptainDataContext } from '../context/CaptianContext'
+import { CaptainDataContext } from '../context/CaptainContext'
 import axios from 'axios';
+import CaptianHome from './CaptianHome';
 
 const CaptainProtectWrapper = ({children}) => {
     const token = localStorage.getItem('token');
@@ -20,7 +21,8 @@ const CaptainProtectWrapper = ({children}) => {
         }
        }).then(response => {
         if(response.status === 200){
-            setCaptain(response.data.captain)
+            setCaptain(response.captain)
+          
             setLoading(false)
         }
     }).catch(err => {
