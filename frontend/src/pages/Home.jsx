@@ -20,7 +20,7 @@ const Home = () => {
      useEffect(function(){
       if(panelOpen) {
         gsap.to(panelRef.current, {
-        height: '70%',
+        height: '78%',
         opacity:1
         })
         gsap.to(panelCloseRef.current, {
@@ -54,7 +54,7 @@ const Home = () => {
       </div>
 
       <div className='  flex flex-col justify-end h-screen  absolute top-0 w-full '>
-        <div className='h-[30%] p-6 bg-white relative'>
+        <div className='h-[28%] p-6 bg-white relative'>
           <h5 ref={panelCloseRef} className='absolute top-6 right-6 text-2xl opacity-0'
            onClick={()=>setpanelOpen(false)}>
           <i className="ri-arrow-down-wide-line"></i>
@@ -62,8 +62,9 @@ const Home = () => {
             <h4 className='text-2xl font-semibold'>Find a trip</h4>
 
             <form onSubmit={(e)=>submitHandler(e)}>
-              <div className='line bg-gray-900 w-1 h-16 absolute top-[38%] left-10  rounded-full'></div>
-              <input className='bg-[#eee] px-10 py-2 text-lg rounded-base w-full mt-5' 
+              <div className='line bg-gray-900 w-1 h-16  absolute top-[100px] left-10  rounded-full'></div>
+              <div>
+              <input className='bg-[#eee] px-10 py-2 text-lg  rounded-base w-full mt-6' 
                 onClick={()=> setpanelOpen(true)}
                 type="text" 
                 placeholder='Add a pick-up location '
@@ -76,9 +77,10 @@ const Home = () => {
                 value={destination}
                 onChange={(e)=> setdestination(e.target.value)}
                  />
+                 </div>
             </form>
         </div>
-        <div ref={panelRef} className=' bg-teal-700 opacity-0 h-0  '>
+        <div ref={panelRef} className=' bg-[#fff]  h-0  '>
           <LocationSearchPanel/>
           
         </div>
