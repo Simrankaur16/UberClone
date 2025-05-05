@@ -1,9 +1,49 @@
 import React from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import CaptainDetails from '../components/CaptainDetails'
 import RidePopup from '../components/RidePopup'
+import gsap from 'gsap'
+import ConfirmRidePopUp from '../components/ConfirmRidePopUp'
+
 
 const CaptianHome = () => {
+  const [ridePopupPanel, setridePopupPanel] = useState(true);
+  const ridePopupPanelRef = useRef(null)
+
+
+  const [confirmRidePopupPanel, setConfirmRidePopupPanel] = useState(false)
+
+  const confirmRidePopupPanelRef = useRef(null)
+
+  useEffect(function () {
+    if (ridePopupPanel) {
+      gsap.to(ridePopupPanelRef.current, {
+        transform: 'translateY(0)'
+      })
+    } else {
+      gsap.to(ridePopupPanelRef.current, {
+        transform: 'translateY(100%)'
+      })
+    }
+
+  }, [ridePopupPanel])
+
+
+  useEffect(function () {
+    if (confirmRidePopupPanel) {
+      gsap.to(confirmRidePopupPanelRef.current, {
+        transform: 'translateY(0)'
+      })
+    } else {
+      gsap.to(confirmRidePopupPanelRef.current, {
+        transform: 'translateY(100%)'
+      })
+    }
+
+  }, [confirmRidePopupPanel])
+
+
   return (
     <div>
       <div className='h-screen'>
@@ -24,13 +64,17 @@ const CaptianHome = () => {
         </div>
 
         <div className='h-2/5 p-4'>
-          <CaptainDetails/>
+          <CaptainDetails />
 
         </div>
 
-        <div className='fixed w-full z-10 bottom-0  bg-white px-3 py-10 pt-12'>
-           <RidePopup/>
-          
+        <div ref={ridePopupPanelRef} className='fixed translate-y-full w-full z-10 bottom-0  bg-white px-3 py-10 pt-12'>
+          <RidePopup setridePopupPanel={setridePopupPanel} setConfirmRidePopupPanel={setConfirmRidePopupPanel} />
+
+        </div>
+        <div ref={confirmRidePopupPanelRef} className='fixed h-screen translate-y-full w-full z-10 bottom-0  bg-white px-3 py-10 pt-12'>
+          <ConfirmRidePopUp setConfirmRidePopupPanel={setConfirmRidePopupPanel} setridePopupPanel={setridePopupPanel} />
+           
         </div>
 
 

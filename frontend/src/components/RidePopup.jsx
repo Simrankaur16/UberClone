@@ -1,10 +1,12 @@
 import React from 'react'
 
-const RidePopup = () => {
+
+const RidePopup = (props) => {
   return (
     <div>
          <h5 className='p-1 text-center w-[93%] absolute top-0' onClick={() => {
-                props.setvehiclePanel(false)
+               
+                props.setridePopupPanel(false)
             }}><i className=" text-3xl text-gray-200 ri-arrow-down-wide-line"></i></h5>
             <h3 className='text-xl font-semibold '>New Ride Available</h3>
 
@@ -50,11 +52,11 @@ const RidePopup = () => {
 
                 </div>
                 <button onClick={()=> {
-
-                     }}className='w-full text-white font-semibold p-2 bg-[#3e8670] rounded-lg'>Confirm</button>
+                       props.setConfirmRidePopupPanel(true)
+                     }}className='w-full text-white font-semibold p-2 bg-[#3e8670] rounded-lg'>Accept</button>
                
                 <button onClick={()=> {
-
+                        props.setridePopupPanel(false)
                      }}className='w-full text-white font-semibold p-2  bg-gray-500 text-gray-700 rounded-lg'>Ignore</button>
             </div>
 
