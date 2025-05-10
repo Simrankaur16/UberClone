@@ -1,7 +1,28 @@
 import React from 'react'
 import {Link } from 'react-router-dom'  
+import { useState, useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import FinishRide from '../components/FinishRide'
+
 
 const CaptainRiding = () => {
+
+  const [finishRidePane, setfinishRidePane] = useState(false);
+  const finishRidePanelRef = useRef(null )
+
+   useEffect(function () {
+    if (finishRidePane) {
+      gsap.to(finishRidePanelRef.current, {
+        transform: 'translateY(0)'
+      })
+    } else {
+      gsap.to(finishRidePanelRef.current, {
+        transform: 'translateY(100%)'
+      })
+    }
+
+  }, [finishRidePane])
+
   return (
     <div>
          <div className='h-screen'>
@@ -22,7 +43,7 @@ const CaptainRiding = () => {
 
         </div>
 
-        <div className='h-1/5 p-4 flex items-center justify-between relative bg-[#dbbb46]'>
+        <div className='h-1/5 p-4 flex items-center justify-between relative bg-[#dbbb46]' onClick={() => setfinishRidePane(true)}>
         <h5 className='p-1 text-center w-[95%] absolute top-0' onClick={() => {
                
              
@@ -31,6 +52,11 @@ const CaptainRiding = () => {
          <h4 className='text-xl font-semibold '>4 KM away</h4>
           <button className='  text-white font-semibold p-2 bg-[#3e8670] rounded-lg'>Complete Ride</button>
                
+        </div>
+
+        <div ref={finishRidePanelRef} className='fixed translate-y-full w-full z-10 bottom-0  bg-white px-3 py-10 pt-12'>
+          <FinishRide setfinishRidePane={setfinishRidePane}/>
+
         </div>
 
     

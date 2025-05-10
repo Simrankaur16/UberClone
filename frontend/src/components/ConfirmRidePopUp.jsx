@@ -3,13 +3,19 @@ import { Link } from 'react-router-dom'
 
 const ConfirmRidePopUp = (props) => {
 
+    const [otp, setotp] = useState('')
+
+    const submitHandler = (e) => {
+        e.preventDefault()
+    } 
+
     return (
         <div >
             <h5 className='p-1 text-center w-[93%] absolute top-0' onClick={() => {
 
                 props.setridePopupPanel(false)
             }}><i className=" text-3xl text-gray-200 ri-arrow-down-wide-line"></i></h5>
-            <h3 className='text-xl font-semibold '>Confirm this ride to Start</h3>
+            <h3 className='text-xl font-semibold '>Finish this Ride</h3>
 
             <div className='flex items-center justify-between p-2 bg-gray-200 rounded-lg mt-4 '>
                 <div className=' flex items-center gap-3 mt-3 '>
@@ -58,7 +64,7 @@ const ConfirmRidePopUp = (props) => {
 
                     <form onSubmit={(e) => { submitHandler(e) }} className='space-y-2' >
 
-                        <input type="text" className='bg-[#e2e2e2] w-full flex justify-center text-center font-semibold p-2  rounded-lg' placeholder='Enter OTP' />
+                        <input value={otp} onChange={()=>setotp(e.target.value)} type="text" className='bg-[#e2e2e2] w-full flex justify-center text-center font-semibold p-2  rounded-lg' placeholder='Enter OTP' />
                         <Link to='/captain-riding' onClick={() => {
                             props.setConfirmRidePopupPanel(true)
                         }} className='w-full flex justify-center text-white font-semibold p-2 bg-[#3e8670] rounded-lg'>Confirm</Link>
