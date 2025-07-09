@@ -1,4 +1,4 @@
- const userModel = require('../models/userModel');
+const userModel = require('../models/userModel');
 
  const jwt = require('jsonwebtoken');
  const BlacklistToken = require('../models/blacklistToken');
@@ -26,8 +26,15 @@
     try {
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        
         const user = await userModel.findById(decoded._id);
-
+        console.log('User found:', user);
+        
+        if (!user) {
+            return res.status(401).json({
+                message: 'Unauthorized: User not found'
+            });
+        }
         req.user = user;
         return next();
 
