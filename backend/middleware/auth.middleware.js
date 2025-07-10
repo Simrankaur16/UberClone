@@ -28,7 +28,8 @@ const userModel = require('../models/userModel');
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         
         const user = await userModel.findById(decoded._id);
-        console.log('User found:', user);
+        console.log('Decoded user id:', decoded._id);
+        console.log('User found:', user)
         
         if (!user) {
             return res.status(401).json({
