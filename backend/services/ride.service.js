@@ -1,14 +1,14 @@
 const rideModel = require('../models/ride.model');
 
 const mapService = require('./maps.service');
-
+const crypto = require('crypto')
 
 async function getFare(pickup, destination) {
     if(!pickup || !destination) {
         throw new Error("Pickup and destination are required");
     }
 
-    const distanceTime = await mapService.getDistanceTime(pickup, destination);
+    const distanceTime = await mapService.getDistanceAndTime(pickup, destination);
     const baseFare = {
         car : 3,
         motorcycle: 2
@@ -21,16 +21,22 @@ async function getFare(pickup, destination) {
         car: 0.2,
         motorcycle: 0.1
     }
-
+     console.log('Distance and time:', distanceTime);
     const fare = {
-        car: baseFare.car + (distanceTime.distance * perKmRAte.auto) + (distanceTime.time )+ (perMinuteRate.car),
-        motorcycle: baseFare.motorcycle + (distanceTime.distance * perKmRate.motorcycle) + (distanceTime.time * perMinuteRate.motorcycle)
+        car: baseFare.car + ((distanceTime.distance.value/1000) * perKmRate.car) + ((distanceTime.duration.value/60) *  perMinuteRate.car),
+        motorcycle: baseFare.motorcycle + ((distanceTime.distance.value/1000) * perKmRate.motorcycle) + ((distanceTime.duration.value/60)* perMinuteRate.motorcycle)
 
     };
     console.log('Fare calculated:', fare);
 
     return fare;
 }
+
+function getOtp(num){
+     const otp = crypto.randomInt(Math.pow(10, num-1), Math.pow(10, num)).toString();
+     return otp;
+}
+
 
 module.exports.createRide =async ( { user, pickup, destination, vehicleType }) => {
 
@@ -43,10 +49,12 @@ module.exports.createRide =async ( { user, pickup, destination, vehicleType }) =
 
     const ride = rideModel.create({
         user, pickup, destination, 
+        otp: getOtp(6),
         fare: fare[vehicleType]
     })
-
+     console.log('Ride created:', ride);
     return ride;
+    
 
   
 
