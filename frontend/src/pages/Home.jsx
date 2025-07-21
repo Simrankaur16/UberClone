@@ -33,6 +33,7 @@ const Home = () => {
     const [activeField, setActiveField] = useState(null);
     const [fare, setfare] = useState({})
     const [vehicleType, setVehicleType] = useState(null);
+    const [ride , setRide] = useState(null);
     
     const handlePickupChange = async (e) => {
         setpickup(e.target.value);
@@ -172,11 +173,24 @@ async function findTrip() {
 
     }
   )
-  console.log('Fare data:', response.data);
- 
+  
   setfare(response.data);
   console.log('Fare data:', response.data);
  
+}
+
+async function createRide(vehicleType){
+       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/create`, {
+        pickup,
+        destination,
+        vehicleType
+       }, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+       }
+       )
+       console.log(response.data)
 }
 
           
@@ -246,12 +260,20 @@ async function findTrip() {
           
         </div>
       </div>
+
       <div ref={vehiclePanelRef} className=' fixed w-full z-10 bottom-0 translate-y-full   bg-white px-3 py-10 pt-12'>
-        <VehiclePanel  fare={fare} setconfirmedRidePanel={setconfirmedRidePanel} setvehiclePanel={setvehiclePanel}/>
+        <VehiclePanel  
+        selectVehicle={setVehicleType}
+        fare={fare} setconfirmedRidePanel={setconfirmedRidePanel} setvehiclePanel={setvehiclePanel}/>
       </div>
+
       <div ref={confirmedRidePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full   bg-white px-3 py-6 pt-12'>
-        <ConfiredRide setconfirmedRidePanel={setconfirmedRidePanel} setvehicleFound={setvehicleFound}  />
+        <ConfiredRide 
+        createRide={createRide} pickup={pickup} destination={destination} fare={fare} vehicleType={vehicleType}
+
+        setconfirmedRidePanel={setconfirmedRidePanel} setvehicleFound={setvehicleFound}  />
       </div>
+
       <div ref={vehicleFoundRef} className='fixed w-full z-10 bottom-0 translate-y-full   bg-white px-3 py-6 pt-12'>
         <LookingDriver setVehicleFound={setvehicleFound} setconfirmedRidePanel={setconfirmedRidePanel}/>
       </div>

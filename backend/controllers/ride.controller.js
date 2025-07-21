@@ -30,6 +30,7 @@ module.exports.createRide = async  ( req, res )  => {
     const {pickup, destination} = req.query;
     try {
         const fare = await rideService.getFare(pickup, destination);
+        return res.status(200).json(fare);
 
     }catch(error){
         
