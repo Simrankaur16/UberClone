@@ -291,3 +291,55 @@ The request body should be a JSON object containing the following fields:
     - Cookie named 'token'
 - Blacklisted tokens cannot be reused for authentication
 
+
+
+## GET /ride/get-fare
+
+### Description
+Calculates and returns the estimated fare for a ride between a pickup and destination location.
+
+### Authentication
+Requires a valid JWT token in the Authorization header or cookie.
+
+### Query Parameters
+
+- `pickup` (string, required): The pickup location (minimum 3 characters).
+- `destination` (string, required): The destination location (minimum 3 characters).
+
+### Response
+
+#### Success
+- **Status Code**: `200 OK`
+- **Body**: JSON object containing fare estimates for each vehicle type.
+    ```json
+    {
+        "car": 12.5,
+        "motorcycle": 8.3
+    }
+    ```
+
+#### Error
+- **Status Code**: `400 Bad Request`
+    ```json
+    {
+        "errors": [
+            {
+                "msg": "Invalid pickup",
+                "param": "pickup",
+                "location": "query"
+            }
+        ]
+    }
+    ```
+- **Status Code**: `500 Internal Server Error`
+    ```json
+    {
+        "message": "Internal server error"
+    }
+    ```
+
+### Notes
+- Both `pickup` and `destination` must be valid and at least 3 characters long.
+- The endpoint uses Google Maps Distance Matrix API to calculate distance and duration.
+- Fare is calculated based on distance, duration, and vehicle type.
+

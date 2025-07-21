@@ -16,7 +16,7 @@ const VehiclePanel = (props) => {
                         <h5 className='font-medium text-sm'>2 mins away </h5>
                         <p className='text-xs text-gray-600'>Affordable, compact rides</p>
                     </div>
-                    <h2 className='text-lg font-semibold '>$16.33</h2>
+                    <h2 className='text-lg font-semibold '>${props.fare.car}</h2>
                 </div>
                 <div onClick={()=>{props.setconfirmedRidePanel(true)}} className='flex border-white border-2    active:border-black active:border-2 bg-gray-100 rounded-2xl w-full items-center p-3 justify-between  mb-2'>
                     <img className='h-12' src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_368,w_552/v1644837706/assets/c4/fba88e-502f-4b43-8443-4c82f580be73/original/UberXL-logo-app.png" alt="uber image" />
@@ -25,7 +25,7 @@ const VehiclePanel = (props) => {
                         <h5 className='font-medium text-sm'>2 mins away </h5>
                         <p className='text-xs text-gray-600'>Affordable, compact rides</p>
                     </div>
-                    <h2 className='text-lg font-semibold '>$16.33</h2>
+                    <h2 className='text-lg font-semibold '>${props.fare.car}</h2>
                 </div>
 
 
