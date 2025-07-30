@@ -4,7 +4,7 @@ const LookingDriver = (props) => {
     return (
         <div>
             <h5 className='p-1 text-center w-[93%] absolute top-0' onClick={() => {
-                props.setConfirmRidePanel(false)
+                props.setvehicleFound(false)
             }}><i className=" text-3xl text-gray-200 ri-arrow-down-wide-line"></i></h5>
             <h3 className='text-xl font-semibold '>Looking for Driver</h3>
 
@@ -17,15 +17,15 @@ const LookingDriver = (props) => {
 
                         <i className="p-2 text-lg ri-map-pin-user-fill"></i>
                         <div >
-                            <h3 className='text-lg font-medium'>638/3A</h3>
-                            <p className='text-sm -m-1 text-gray-600'>3 queen Street, Brampton, ON</p>
+                            {/* <h3 className='text-lg font-medium'>638/3A</h3> */}
+                            <p className='text-m -m-1 text-gray-900'>{props.pickup}</p>
                         </div>
                     </div>
                     <div className='flex items-center  gap-6 p-2 border-b-1  border-zinc-200'>
                         <i className="p-2 text-lg ri-map-pin-2-fill"></i>
                         <div >
-                            <h3 className='text-lg font-medium'>638/3A</h3>
-                            <p className='text-sm -m-1 text-gray-600'>3 queen Street, Brampton, ON</p>
+                            {/* <h3 className='text-lg font-medium'>638/3A</h3> */}
+                            <p className='text-m -m-1 text-gray-900'>{props.destination}</p>
                         </div>
                     </div>
 
@@ -33,14 +33,13 @@ const LookingDriver = (props) => {
 
                         <i className="p-2 text-lg ri-currency-fill"></i>
                         <div >
-                            <h3 className='text-lg font-medium'>$20.32</h3>
-                            <p className='text-sm -m-1 text-gray-600'>Cash Cash</p>
+                            <h3 className='text-sm font-medium'>${props.fare[props.vehicleType]}</h3>
+                            <p className='text-sm -m-1 text-gray-600'>Cash </p>
                         </div>
                     </div>
 
 
                 </div>
-                <button className='w-full text-white font-semibold p-2 bg-[#3e8670] rounded-lg'>Confirm</button>
             </div>
 
         </div>

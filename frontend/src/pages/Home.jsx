@@ -124,11 +124,11 @@ const submitHandler = (e)=>{
 
      useEffect(function(){
        if(confirmedRidePanel){
-        gsap.to(confirmedRidePanel.current, {
+        gsap.to(confirmedRidePanelRef.current, {
           transform: 'translateY(0)'
         })
       }else {
-          gsap.to(confirmedRidePanel.current, {
+          gsap.to(confirmedRidePanelRef.current, {
             transform:'translateY(100%)'
           })
         }
@@ -179,7 +179,7 @@ async function findTrip() {
  
 }
 
-async function createRide(vehicleType){
+async function createRide(){
        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/create`, {
         pickup,
         destination,
@@ -269,13 +269,14 @@ async function createRide(vehicleType){
 
       <div ref={confirmedRidePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full   bg-white px-3 py-6 pt-12'>
         <ConfiredRide 
-        createRide={createRide} pickup={pickup} destination={destination} fare={fare} vehicleType={vehicleType}
+          createRide={createRide} pickup={pickup} destination={destination} fare={fare} vehicleType={vehicleType}
 
         setconfirmedRidePanel={setconfirmedRidePanel} setvehicleFound={setvehicleFound}  />
       </div>
 
       <div ref={vehicleFoundRef} className='fixed w-full z-10 bottom-0 translate-y-full   bg-white px-3 py-6 pt-12'>
-        <LookingDriver setVehicleFound={setvehicleFound} setconfirmedRidePanel={setconfirmedRidePanel}/>
+        <LookingDriver  createRide={createRide} pickup={pickup} destination={destination} fare={fare} vehicleType={vehicleType}
+        setVehicleFound={setvehicleFound} setconfirmedRidePanel={setconfirmedRidePanel} />
       </div>
       <div ref={waitingForDriverRef} className='fixed w-full z-10 bottom-0    bg-white px-3 py-6 pt-12'>
       <WaitingDriver waitingForDriver={waitingForDriver} />

@@ -17,15 +17,15 @@ const ConfiredRide = (props) => {
 
                         <i className="p-2 text-lg ri-map-pin-user-fill"></i>
                         <div >
-                            <h3 className='text-lg font-medium'>638/3A</h3>
-                            <p className='text-sm -m-1 text-gray-600'>3 queen Street, Brampton, ON</p>
+                            {/* <h3 className='text-lg font-medium'>638/3A</h3> */}
+                            <p className='text-m -m-1 text-gray-800'>{props.pickup}</p>
                         </div>
                     </div>
                     <div className='flex items-center  gap-6 p-2 border-b-1  border-zinc-200'>
                         <i className="p-2 text-lg ri-map-pin-2-fill"></i>
                         <div >
-                            <h3 className='text-lg font-medium'>638/3A</h3>
-                            <p className='text-sm -m-1 text-gray-600'>3 queen Street, Brampton, ON</p>
+                            {/* <h3 className='text-lg font-medium'>638/3A</h3> */}
+                            <p className='text-m -m-1 text-gray-800'>{props.destination }</p>
                         </div>
                     </div>
 
@@ -33,16 +33,18 @@ const ConfiredRide = (props) => {
 
                         <i className="p-2 text-lg ri-currency-fill"></i>
                         <div >
-                            <h3 className='text-lg font-medium'>$20.32</h3>
-                            <p className='text-sm -m-1 text-gray-600'>Cash Cash</p>
+                            <h3 className='text-lg font-semibold'>${props.fare[props.vehicleType]}</h3>
+                            <p className='text-sm -m-1 text-gray-600'>Cash</p>
                         </div>
                     </div>
 
 
                 </div>
                 <button onClick={()=> {
-                    props.setvehicleFound(true) 
-                    props.setconfirmedRidePanel(false) }}className='w-full text-white font-semibold p-2 bg-[#3e8670] rounded-lg'>Confirm</button>
+                    props.setvehicleFound(true); 
+                    props.setconfirmedRidePanel(false);
+                   props.createRide(); }}
+                    className='w-full text-white font-semibold p-2 bg-[#3e8670] rounded-lg'>Confirm</button>
             </div>
 
         </div>
