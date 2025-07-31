@@ -23,12 +23,12 @@ const CaptainContext = ({children}) => {
 
 
   return (
-   <div>
+   
     <CaptainDataContext.Provider value={value}>
         {children}
     </CaptainDataContext.Provider>
-   </div>
+   
   )
 }
 
-export default CaptainContext
+export default CaptainContext;

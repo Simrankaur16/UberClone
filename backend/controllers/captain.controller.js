@@ -21,6 +21,7 @@ module.exports.registerCaptain = async(req,res,next)=> {
     const hashedPassword = await captainModel.hashPassword(password);
 
     const captain = await captainService.createCaptain({
+        
         firstname: fullname.firstname,
         lastname: fullname.lastname,
         email,
@@ -35,17 +36,17 @@ module.exports.registerCaptain = async(req,res,next)=> {
     const token = captain.generateAuthToken();
 
     // return tokena and captain data
-   return  res.status(200).json({token, captain})
+   return  res.status(201).json({token, captain})
 
 
 }
 
 module.exports.loginCaptain = async(req, res, next) => {
 
-    const erros = validationResult(req);
+    const errors = validationResult(req);
 
-    if(!erros.isEmpty()){
-        return res.status(400).json({error: erros.array()})
+    if(!errors.isEmpty()){
+        return res.status(400).json({error: errors.array()})
     }
 
     const {email, password} = req.body;
@@ -61,13 +62,13 @@ module.exports.loginCaptain = async(req, res, next) => {
     const isValidPassword = await captain.comparePassword(password);
 
     if(!isValidPassword){
-        return res.status(400).json({error: "Invalid email or password"});
+        return res.status(401).json({error: "Invalid email or password"});
     }
 
     const token = captain.generateAuthToken();
     res.cookie('token',token);
 
-    res.status(200).json({token, captain})
+    res.status(200).json({token, captain});
 
 
 
@@ -76,7 +77,7 @@ module.exports.loginCaptain = async(req, res, next) => {
 }
 
 module.exports.getCaptainProfile = async(req, res, next) => {
-    res.status(200).json(req.captain);
+    res.status(200).json({captain: req.captain});
 }
 
 module.exports.logoutCaptain = async(req,res, next) =>{

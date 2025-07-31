@@ -46,7 +46,7 @@ const userModel = require('../models/userModel');
     }   
  }
 
- module.exports.authCaptain = async(req,res, next) =>{
+ module.exports.authCaptain = async(req, res, next) =>{
     const token = req.cookies?.token || req.headers.authorization?.split(' ')[1];
    
     if(!token) {
@@ -64,9 +64,14 @@ const userModel = require('../models/userModel');
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const captain = await captainModel.findById(decoded._id);
+        const captain = await captainModel.findById(decoded.id);
 
         req.captain = captain;
+        if (!captain) {
+            return res.status(401).json({
+                message: 'Unauthorized: Captain not found'
+            });
+        }
         console.log(req.captain);
         return next();
 

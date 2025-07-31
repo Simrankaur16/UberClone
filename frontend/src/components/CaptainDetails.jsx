@@ -3,10 +3,8 @@ import {CaptainDataContext} from '../context/CaptainContext'
 
 const CaptainDetails = () => {
 
-const {captain} = useContext(CaptainDataContext) ;
-if (!captain || !captain.fullname) {
-    return <div>Loading captain details...</div>
-  }
+const {captain} = useContext(CaptainDataContext) 
+
 
   return (
     <>
