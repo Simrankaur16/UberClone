@@ -8,6 +8,9 @@ import ConfiredRide from '../components/ConfiredRide'
 import LookingDriver from '../components/LookingDriver'
 import WaitingDriver from '../components/WaitingDriver'
 import axios from 'axios'
+import {SocketContext} from '../context/SocketContext.jsx'
+import { UserDataContext } from '../context/UserContext.jsx'
+import { useContext } from 'react'
 
 
 
@@ -34,6 +37,16 @@ const Home = () => {
     const [fare, setfare] = useState({})
     const [vehicleType, setVehicleType] = useState(null);
     const [ride , setRide] = useState(null);
+
+    const {socket} = useContext(SocketContext);
+    const {user} = useContext(UserDataContext);
+
+
+    useEffect(() => {
+
+    socket.emit("join" , {userType: "user", userId: user._id})
+
+    })
     
     const handlePickupChange = async (e) => {
         setpickup(e.target.value);

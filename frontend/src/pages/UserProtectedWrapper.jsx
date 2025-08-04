@@ -25,7 +25,7 @@ const UserProtectedWrapper = ({
     }
   }).then(response =>{
       if(response.status === 200){
-        setUser(response.data.user);
+        setUser(response.data);
         setLoading(false)
 
       }
