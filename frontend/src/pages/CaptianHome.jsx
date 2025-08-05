@@ -30,23 +30,31 @@ const CaptianHome = () => {
     const updateLocation = () => {
  
       if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
+        navigator.geolocation.getCurrentPosition(position => {
 
-          navigator.geolocation.getCurrentPosition(position => {
+          console.log("captain location", position.coords.latitude, position.coords.longitude)
+
+          
             socket.emit('update-location-captain', {
             userId: captain._id, 
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
+            location : {
+              ltd: position.coords.latitude,
+            lng: position.coords.longitude
+            }
+             })
           })
-
-          })
-
-
-       } )
+        } 
       }
-    }
 
+      const locationInterval = setInterval(updateLocation, 10000)
+      updateLocation();
+ 
    
+  })
+
+  socket.on('new-ride', (data) => {
+    console.log(data);
+    setConfirmRidePopupPanel(true);
   })
 
   useEffect(function () {
