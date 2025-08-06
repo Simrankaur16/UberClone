@@ -16,6 +16,7 @@ const CaptianHome = () => {
   const [confirmRidePopupPanel, setConfirmRidePopupPanel] = useState(false)
 
   const confirmRidePopupPanelRef = useRef(null)
+  const [ ride, setRide ] = useState(null)
 
   const {socket} = useContext(SocketContext);
   const {captain} = useContext(CaptainDataContext);
@@ -23,8 +24,9 @@ const CaptianHome = () => {
   useEffect(() => 
     {
     socket.emit("join", {
-      userType: "captain",
-      userId: captain._id
+      userId: captain._id,
+      userType: 'captain'
+      
     })
 
     const updateLocation = () => {
@@ -39,7 +41,7 @@ const CaptianHome = () => {
             userId: captain._id, 
             location : {
               ltd: position.coords.latitude,
-            lng: position.coords.longitude
+              lng: position.coords.longitude
             }
              })
           })
@@ -50,11 +52,13 @@ const CaptianHome = () => {
       updateLocation();
  
    
-  })
+  },[])
 
   socket.on('new-ride', (data) => {
-    console.log(data);
-    setConfirmRidePopupPanel(true);
+
+    console.log(data , "new ride data");
+    setRide(data);
+    setridePopupPanel(true);
   })
 
   useEffect(function () {
@@ -110,7 +114,7 @@ const CaptianHome = () => {
         </div>
 
         <div ref={ridePopupPanelRef} className='fixed translate-y-full w-full z-10 bottom-0  bg-white px-3 py-10 pt-12'>
-          <RidePopup setridePopupPanel={setridePopupPanel} setConfirmRidePopupPanel={setConfirmRidePopupPanel} />
+          <RidePopup setridePopupPanel={setridePopupPanel} setConfirmRidePopupPanel={setConfirmRidePopupPanel} ride={ride} />
 
         </div>
         <div ref={confirmRidePopupPanelRef} className='fixed h-screen translate-y-full w-full z-10 bottom-0  bg-white px-3 py-10 pt-12'>
