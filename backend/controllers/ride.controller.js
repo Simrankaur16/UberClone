@@ -1,10 +1,11 @@
 const rideService = require('../services/ride.service');
 const mapService = require('../services/maps.service');
+const rideModel = require('../models/ride.model');
 const {sendMessageToSocketId} = require('../socket');
 
 
 const {validationResult} = require('express-validator'); // TO Check error for validdation  
-const rideModel = require('../models/ride.model');
+
 
 
 module.exports.createRide = async  ( req, res )  => {
@@ -75,7 +76,8 @@ module.exports.createRide = async  ( req, res )  => {
     const {rideId} = req.body;
 
     try {
-        const ride = await rideService.confirmRide(rideId, req.captain._id);
+        const ride = await rideService.confirmRide({rideId, captain: req.captain});
+        console.log('Confirming ride:', { rideId, captain: req.captain });
 
         sendMessageToSocketId(ride.user.socketId, {
             event: 'ride-confirmed',

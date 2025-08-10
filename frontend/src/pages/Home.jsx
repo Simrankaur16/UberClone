@@ -6,7 +6,7 @@ import LocationSearchPanel from '../components/LocationSearchPanel'
 import VehiclePanel from '../components/VehiclePanel'
 import ConfiredRide from '../components/ConfiredRide'
 import LookingDriver from '../components/LookingDriver'
-import WaitingDriver from '../components/WaitingDriver'
+import WaitingForDriver from '../components/WaitingDriver'
 import axios from 'axios'
 import {SocketContext} from '../context/SocketContext'
 import { UserDataContext } from '../context/UserContext'
@@ -30,7 +30,7 @@ const Home = () => {
     const waitingForDriverRef = useRef(null)
     const [confirmedRidePanel, setconfirmedRidePanel] = useState(false);
     const [vehicleFound, setvehicleFound] = useState(false)
-    const [ waitingForDriver, setwaitingForDriver] = useState(false)
+    const [ waitingForDriver, setWaitingForDriver] = useState(false)
     const [pickupSuggestions, setPickupSuggestions] = useState([]);
     const [destinationSuggestions, setdestinationSuggestions] = useState([]);
     const [activeField, setActiveField] = useState(null);
@@ -52,10 +52,10 @@ const Home = () => {
 
 
 
-    socket.on('ride-confirmed', ride => {
+    socket.on('ride-confirmed', (ride) => {
 
       setvehicleFound(false);
-      setwaitingForDriver(true);
+      setWaitingForDriver(true);
       setRide(ride);
       console.log('Ride confirmed:', data);
 
@@ -312,8 +312,8 @@ async function createRide(){
         setVehicleFound={setvehicleFound}  />
       </div>
       <div ref={waitingForDriverRef} className='fixed w-full z-10 bottom-0    bg-white px-3 py-6 pt-12'>
-      <WaitingDriver waitingForDriver={waitingForDriver} ride={ride} setVehicleFound={setvehicleFound}
-      setwaitingForDriver={setwaitingForDriver}  />
+      <WaitingForDriver ride={ride} setVehicleFound={setvehicleFound}
+        setWaitingForDriver={setWaitingForDriver} waitingForDriver={WaitingForDriver} />
       </div>
 
     </div>
