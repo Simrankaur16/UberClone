@@ -13,10 +13,12 @@ function initializeSocket(server) {
     });
 
     io.on('connection', (socket) => {
-        console.log('A user connected:', socket.id);
+        console.log('client connected:', socket.id);
 
         socket.on('join', async(data)=> {
              const {userId, userType } = data;
+
+             console.log(`User joined: ${userType} with ID: ${userId}`);
 
              if(userType === 'user') {
                 await userModel.findByIdAndUpdate(userId, {socketId: socket.id});
@@ -26,15 +28,15 @@ function initializeSocket(server) {
 
         });;
     
-        socket.on('update-location-captain ', async(data) => {
-            const {userId,  location} = data;
+        socket.on('update-location-captain', async(data) => {
+            const {userId, location} = data;
 
             if(!location || !location.ltd|| !location.lng) {
                
                 return socket.emit('error', 'Invalid location data');
             }
 
-            await captainModel.findByIdandUpdate(userId, {
+            await captainModel.findByIdAndUpdate(userId, {
                 location: {
                     ltd: location.ltd,
                     lng: location.lng
@@ -45,7 +47,7 @@ function initializeSocket(server) {
         })
 
         socket.on('disconnect', () => {
-            console.log('User disconnected:', socket.id);
+            console.log(`client disconnected:' ${socket.id}`);
         });
 
         // Add more event listeners as needed
@@ -53,15 +55,17 @@ function initializeSocket(server) {
 }
 
 
-function sendMessageToSocketId(socketId, messageObject) {
-    console.log('Sending message to socketId:', socketId, 'Message:', messageObject);
+const sendMessageToSocketId = (socketId, messageObject) => {
+    
+    console.log(messageObject, "message object");
+
+    // console.log('Sending message to socketId:', socketId, 'Message:', messageObject);
     if (io) {
         io.to(socketId).emit(messageObject.event, messageObject.data);
     } else {
-        console.error('Socket.io is not initialized');
+        console.log('Socket.io is not initialized');
     }
 }
 
 
-module.exports = {
-    initializeSocket,sendMessageToSocketId };
+module.exports = { initializeSocket,sendMessageToSocketId };

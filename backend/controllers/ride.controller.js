@@ -65,4 +65,28 @@ module.exports.createRide = async  ( req, res )  => {
 
  }
 
+ module.exports.confirmRide = async (req, res) => {
+
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        return res.status(400).json({errors: errors.array()});
+    }
+
+    const {rideId} = req.body;
+
+    try {
+        const ride = await rideService.confirmRide(rideId, req.captain._id);
+
+        sendMessageToSocketId(ride.user.socketId, {
+            event: 'ride-confirmed',
+            data: ride
+        });
+        
+        return res.status(200).json(ride);
+
+    } catch (error) {
+        console.error('Error confirming ride:', error.message);
+        return res.status(500).json({message: error.message});
+    }
+ }
 

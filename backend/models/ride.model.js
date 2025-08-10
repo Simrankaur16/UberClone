@@ -11,6 +11,10 @@ const rideSchema = new mongoose.Schema({
         ref: 'captain',
          
     },
+    pickup:{
+        type: String,
+        required: true,
+    },
     destination: {
         type: String,
         required: true,

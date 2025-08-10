@@ -63,20 +63,26 @@ module.exports.getSuggestions = async (input) => {
     if (!input) {
         throw new Error('query is required');
     }
+    
 
     const apiKey = process.env.GOOGLE_MAPS_API;
+     if (!apiKey) {
+        throw new Error('Google Maps API key is missing');
+    }
     const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(input)}&key=${apiKey}`;
 
     try {
         const response = await axios.get(url);
-        if (response.data.status == 'OK') {
+        if (response.data.status === 'OK') {
             return response.data.predictions;
         } else {
+            console.error('Google Maps API error:', response.data);
             throw new Error('Unable to fetch suggestions')
         }
     } catch (error) {
+        console.error('Maps service error:', error);
         console.error(error)
-        throw err;
+        throw error;
     }
 }
 
@@ -88,7 +94,7 @@ module.exports.getCaptainInTheRadius = async (ltd, lng, radius) => {
     const captain = await captainModel.find({
         location: {
             $geoWithin: {
-                $centerSphere: [[ltd, lng], radius / 6371] // radius in kilometers
+                $centerSphere: [[ltd, lng], radius/6371] // radius in kilometers
             }
         }
     });

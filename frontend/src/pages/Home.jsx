@@ -8,8 +8,8 @@ import ConfiredRide from '../components/ConfiredRide'
 import LookingDriver from '../components/LookingDriver'
 import WaitingDriver from '../components/WaitingDriver'
 import axios from 'axios'
-import {SocketContext} from '../context/SocketContext.jsx'
-import { UserDataContext } from '../context/UserContext.jsx'
+import {SocketContext} from '../context/SocketContext'
+import { UserDataContext } from '../context/UserContext'
 import { useContext } from 'react'
 
 
@@ -40,16 +40,32 @@ const Home = () => {
 
     const {socket} = useContext(SocketContext);
     const {user} = useContext(UserDataContext);
-
+   
 
     useEffect(() => {
 
+      console.log(user);
+
     socket.emit("join" , {userType: "user", userId: user._id})
 
+    },[user])
+
+
+
+    socket.on('ride-confirmed', ride => {
+
+      setvehicleFound(false);
+      setwaitingForDriver(true);
+      setRide(ride);
+      console.log('Ride confirmed:', data);
+
     })
+
+    
     
     const handlePickupChange = async (e) => {
         setpickup(e.target.value);
+        console.log('Pickup value:', e.target.value);
         try {
 
           const response = await  axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`, {
@@ -62,7 +78,7 @@ const Home = () => {
             console.log('Pickup suggestions:', response.data);
 
             setPickupSuggestions(response.data);
-      } catch {
+      } catch (error){
           console.error('Error fetching pickup suggestions:', error);
         }
 }
@@ -282,17 +298,22 @@ async function createRide(){
 
       <div ref={confirmedRidePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full   bg-white px-3 py-6 pt-12'>
         <ConfiredRide 
-          createRide={createRide} pickup={pickup} destination={destination} fare={fare} vehicleType={vehicleType}
-
+          createRide={createRide} 
+          pickup={pickup}
+          destination={destination} 
+          fare={fare} 
+          vehicleType={vehicleType}
+          
         setconfirmedRidePanel={setconfirmedRidePanel} setvehicleFound={setvehicleFound}  />
       </div>
 
       <div ref={vehicleFoundRef} className='fixed w-full z-10 bottom-0 translate-y-full   bg-white px-3 py-6 pt-12'>
         <LookingDriver  createRide={createRide} pickup={pickup} destination={destination} fare={fare} vehicleType={vehicleType}
-        setVehicleFound={setvehicleFound} setconfirmedRidePanel={setconfirmedRidePanel} />
+        setVehicleFound={setvehicleFound}  />
       </div>
       <div ref={waitingForDriverRef} className='fixed w-full z-10 bottom-0    bg-white px-3 py-6 pt-12'>
-      <WaitingDriver waitingForDriver={waitingForDriver} />
+      <WaitingDriver waitingForDriver={waitingForDriver} ride={ride} setVehicleFound={setvehicleFound}
+      setwaitingForDriver={setwaitingForDriver}  />
       </div>
 
     </div>

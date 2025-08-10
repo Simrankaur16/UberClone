@@ -39,6 +39,9 @@ module.exports.getSuggestions = async(req, res, next) => {
     try {
 
         const errors = validationResult(req);
+        if(!errors.isEmpty()) {
+            return res.status(400).json({errors: errors.array()});
+        }
         
 
         const {input} = req.query;
@@ -48,8 +51,8 @@ module.exports.getSuggestions = async(req, res, next) => {
     
     
 }catch(error) {
-       console.error(error)
-        res.status(500).json({message: 'Suggestions not found'})
+        console.error('Maps controller error:', error);
+        res.status(500).json({message: 'Suggestions not found', error: error.message})
     }
 
 }

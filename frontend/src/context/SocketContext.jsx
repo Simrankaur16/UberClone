@@ -26,9 +26,7 @@ const SocketProvider = ({ children }) => {
   // Send message to a specific event
   
   return (
-    <SocketContext.Provider value={{ socket
-
-    }}>
+    <SocketContext.Provider value={{ socket}}>
       {children}
     </SocketContext.Provider>
   );

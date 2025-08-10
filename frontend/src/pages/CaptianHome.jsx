@@ -7,9 +7,11 @@ import gsap from 'gsap'
 import ConfirmRidePopUp from '../components/ConfirmRidePopUp'
 import {SocketContext} from '../context/SocketContext.jsx'
 import { CaptainDataContext } from '../context/CaptainContext.jsx'
+import axios from 'axios'
+
 
 const CaptianHome = () => {
-  const [ridePopupPanel, setridePopupPanel] = useState(true);
+  const [ridePopupPanel, setridePopupPanel] = useState(false);
   const ridePopupPanelRef = useRef(null)
 
 
@@ -34,7 +36,17 @@ const CaptianHome = () => {
       if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
 
+
           console.log("captain location", position.coords.latitude, position.coords.longitude)
+
+          console.log({
+            _id: captain._id,
+            captainId: captain._id,
+            location: {
+              ltd: position.coords.latitude,
+              lng: position.coords.longitude
+            }
+          });
 
           
             socket.emit('update-location-captain', {
@@ -88,6 +100,28 @@ const CaptianHome = () => {
 
   }, [confirmRidePopupPanel])
 
+  async function confirmRide() {
+
+
+
+   const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/confirm`, {
+
+      rideId: ride._id,
+      captainId: captain._id,
+
+      
+    },{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+
+      }
+    })
+
+   setridePopupPanel(false);
+   confirmRidePopupPanel(true);
+
+  }
+
 
   return (
     <div>
@@ -114,7 +148,11 @@ const CaptianHome = () => {
         </div>
 
         <div ref={ridePopupPanelRef} className='fixed translate-y-full w-full z-10 bottom-0  bg-white px-3 py-10 pt-12'>
-          <RidePopup setridePopupPanel={setridePopupPanel} setConfirmRidePopupPanel={setConfirmRidePopupPanel} ride={ride} />
+          <RidePopup setridePopupPanel={setridePopupPanel} 
+          setConfirmRidePopupPanel={setConfirmRidePopupPanel} 
+          ride={ride}
+          confirmRide={confirmRide}
+           />
 
         </div>
         <div ref={confirmRidePopupPanelRef} className='fixed h-screen translate-y-full w-full z-10 bottom-0  bg-white px-3 py-10 pt-12'>
@@ -129,5 +167,7 @@ const CaptianHome = () => {
     </div>
   )
 }
+
+
 
 export default CaptianHome

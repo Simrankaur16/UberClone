@@ -62,10 +62,9 @@ const captainSchema = new mongoose.Schema({
     location: {
         ltd:{
             type: Number,
-
         },
         lng: {
-            type: Number
+            type: Number,
         }
     }
 
@@ -86,4 +85,10 @@ captainSchema.statics.hashPassword = async function(password){
       return await bcrypt.hash(password, 10)
 }
 
-module.exports = mongoose.model('captain', captainSchema);
+
+const captainModel = mongoose.model('captain', captainSchema)
+
+
+module.exports = captainModel;
+
+// module.exports = mongoose.model('captain', captainSchema);
