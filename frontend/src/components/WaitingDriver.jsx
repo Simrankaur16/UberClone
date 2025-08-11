@@ -13,6 +13,8 @@ const WaitingDriver = (props) => {
                 <h2 className='text'>{props.ride?.captain.fullname.firstname || 'no captain '}</h2>
                 <h4 className='text-xl font-semibold '>{props.ride?.captain.vehicle.plate}</h4>
                 <p className='text-sm text-gray-600'>Civic</p>
+                <h1 className='text-lg font-semibold'>{props.ride?.otp}</h1>
+                
               </div>
             </div>
 
@@ -25,14 +27,14 @@ const WaitingDriver = (props) => {
                         <i className="p-2 text-lg ri-map-pin-user-fill"></i>
                         <div >
                             {/* <h3 className='text-lg font-medium'>638/3A</h3> */}
-                            <p className='text-m -m-1 text-gray-800'>{props.ride?.pickup}</p>
+                            <p className='text-sm -m-1 text-gray-700'>{props.ride?.pickup}</p>
                         </div>
                     </div>
                     <div className='flex items-center  gap-6 p-2 border-b-1  border-zinc-200'>
                         <i className="p-2 text-lg ri-map-pin-2-fill"></i>
                         <div >
                             {/* <h3 className='text-lg font-medium'>638/3A</h3> */}
-                            <p className='text-sm -m-1 text-gray-600'>{props.ride?.destination}</p>
+                            <p className='text-sm -m-1 text-gray-700'>{props.ride?.destination}</p>
                         </div>
                     </div>
 
@@ -40,7 +42,7 @@ const WaitingDriver = (props) => {
 
                         <i className="p-2 text-lg ri-currency-fill"></i>
                         <div >
-                            <h3 className='text-lg font-medium'>${props.ride?.fare}</h3>
+                            <h3 className='text-m font-normal'>${props.ride?.fare}</h3>
                             <p className='text-sm -m-1 text-gray-600'>Cash Cash</p>
                         </div>
                     </div>
