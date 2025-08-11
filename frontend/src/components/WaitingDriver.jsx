@@ -10,7 +10,7 @@ const WaitingDriver = (props) => {
             <div className='flex items-center justify-between mx-5 '>
               <img className='h-15' src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_368,w_552/v1644837706/assets/c4/fba88e-502f-4b43-8443-4c82f580be73/original/UberXL-logo-app.png" alt="" />
               <div className='text-right'>
-                <h2 className='text'>{props.ride?.captain.fullname.firstname}</h2>
+                <h2 className='text'>{props.ride?.captain.fullname.firstname || 'no captain '}</h2>
                 <h4 className='text-xl font-semibold '>{props.ride?.captain.vehicle.plate}</h4>
                 <p className='text-sm text-gray-600'>Civic</p>
               </div>

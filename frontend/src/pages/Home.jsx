@@ -29,8 +29,8 @@ const Home = () => {
     const vehicleFoundRef = useRef(null)
     const waitingForDriverRef = useRef(null)
     const [confirmedRidePanel, setconfirmedRidePanel] = useState(false);
-    const [vehicleFound, setvehicleFound] = useState(false)
-    const [ waitingForDriver, setWaitingForDriver] = useState(false)
+    const [vehicleFound, setVehicleFound] = useState(false)
+    const [waitingForDriver, setWaitingForDriver] = useState(false)
     const [pickupSuggestions, setPickupSuggestions] = useState([]);
     const [destinationSuggestions, setdestinationSuggestions] = useState([]);
     const [activeField, setActiveField] = useState(null);
@@ -54,10 +54,10 @@ const Home = () => {
 
     socket.on('ride-confirmed', (ride) => {
 
-      setvehicleFound(false);
+      setVehicleFound(false);
       setWaitingForDriver(true);
       setRide(ride);
-      console.log('Ride confirmed:', data);
+      console.log('Ride confirmed:', ride);
 
     })
 
@@ -188,7 +188,7 @@ const submitHandler = (e)=>{
           })
         }
        
-     },[vehicleFound])
+     },[waitingForDriver ])
 
 async function findTrip() {
   setvehiclePanel(true);
@@ -304,16 +304,16 @@ async function createRide(){
           fare={fare} 
           vehicleType={vehicleType}
           
-        setconfirmedRidePanel={setconfirmedRidePanel} setvehicleFound={setvehicleFound}  />
+        setconfirmedRidePanel={setconfirmedRidePanel} setVehicleFound={setVehicleFound}  />
       </div>
 
       <div ref={vehicleFoundRef} className='fixed w-full z-10 bottom-0 translate-y-full   bg-white px-3 py-6 pt-12'>
         <LookingDriver  createRide={createRide} pickup={pickup} destination={destination} fare={fare} vehicleType={vehicleType}
-        setVehicleFound={setvehicleFound}  />
+        setVehicleFound={setVehicleFound}  />
       </div>
       <div ref={waitingForDriverRef} className='fixed w-full z-10 bottom-0    bg-white px-3 py-6 pt-12'>
-      <WaitingForDriver ride={ride} setVehicleFound={setvehicleFound}
-        setWaitingForDriver={setWaitingForDriver} waitingForDriver={WaitingForDriver} />
+      <WaitingForDriver ride={ride} setVehicleFound={setVehicleFound}
+        setWaitingForDriver={setWaitingForDriver} waitingForDriver={waitingForDriver} />
       </div>
 
     </div>
