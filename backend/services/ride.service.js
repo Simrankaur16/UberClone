@@ -76,12 +76,12 @@ module.exports.confirmRide = async ( { rideId, captain }) => {
             _id: rideId,
         },{
             status: 'accepted',
-            captian: captain._id
+            captain: captain._id
         }
     );
 
     const ride = await rideModel.findOne({
-        _id: ride._id
+        _id: rideId
     }).populate('user').populate('captain');
     console.log('Ride confirmed:', ride);
     if(!ride) {
