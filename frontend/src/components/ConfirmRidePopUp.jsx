@@ -1,13 +1,32 @@
 import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const ConfirmRidePopUp = (props) => {
 
     const [otp, setotp] = useState('')
+    const navigate = useNavigate()
 
     const submitHandler = (e) => {
         e.preventDefault()
-    } 
+
+        const response = axios.get(`${import.meta.env.VITE_BASE_URL}/rides/start-ride`, {   
+            params: {
+                rideId: props.ride._id,
+                otp: otp
+            },
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+         } 
+        )
+        if(response.status === 200) {
+            props.setConfirmRidePopupPanel(false)
+            props.setridePopupPanel(false)
+            navigate('/captain-riding', {state: {ride: props.ride}})
+        }
+    }
 
     return (
         <div >
@@ -36,14 +55,14 @@ const ConfirmRidePopUp = (props) => {
                         <i className="p-2 text-lg ri-map-pin-user-fill"></i>
                         <div >
                             {/* <h3 className='text-lg font-medium'>638/3A</h3> */}
-                            <p className='text-sm -m-1 text-gray-600'>{props.ride?.pcikup}</p>
+                            <p className='text-m -m-1 text-gray-800'>{props.ride?.pickup}</p>
                         </div>
                     </div>
                     <div className='flex items-center  gap-6 p-2 border-b-1  border-zinc-200'>
                         <i className="p-2 text-lg ri-map-pin-2-fill"></i>
                         <div >
                             {/* <h3 className='text-lg font-medium'>638/3A</h3> */}
-                            <p className='text-sm -m-1 text-gray-600'>{props.ride?.destination}</p>
+                            <p className='text-m -m-1 text-gray-800'>{props.ride?.destination}</p>
                         </div>
                     </div>
 
@@ -62,18 +81,14 @@ const ConfirmRidePopUp = (props) => {
 
                 <div className='mt-3 w-full'>
 
-                    <form onSubmit={(e) => { submitHandler(e) }} className='space-y-2' >
+                    <form onSubmit={submitHandler} className='space-y-2' >
 
-                        <input value={otp} onChange={()=>setotp(e.target.value)} type="text" className='bg-[#e2e2e2] w-full flex justify-center text-center font-semibold p-2  rounded-lg' placeholder='Enter OTP' />
-                        <button  onClick={() => {
-                            props.setConfirmRidePopupPanel(true)
-                        }} className='w-full flex justify-center text-white font-semibold p-2 bg-[#3e8670] rounded-lg'>Confirm</button>
+                        <input value={otp} onChange={(e)=>setotp(e.target.value)} type="text" className='bg-[#e2e2e2] w-full flex justify-center text-center font-semibold p-2  rounded-lg' placeholder='Enter OTP' />
+                        <button className='w-full flex justify-center text-white font-semibold p-2 bg-[#3e8670] rounded-lg'>Confirm</button>
 
                         <button onClick={() => {
-
-
-
                             props.setConfirmRidePopupPanel(false)
+                            props.setridePopupPanel(false)
                         }} className='w-full text-white font-semibold p-2  bg-red-900  rounded-lg'>Cancel</button>
 
                     </form>

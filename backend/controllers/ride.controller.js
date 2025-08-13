@@ -104,6 +104,8 @@ module.exports.createRide = async  ( req, res )  => {
     try {
         const ride = await rideService.startRide({rideId, otp, captain: req.captain});
 
+        console.log('Starting ride:', { rideId, otp, captain: req.captain });
+
         sendMessageToSocketId(ride.user.socketId, {
             event: 'ride-started',
             data: ride

@@ -48,7 +48,7 @@ const Rinding = () => {
                     </div>
                 </div>
 
-                <button className='w-full text-white font-semibold p-2 bg-[#3e8670] rounded-lg'>Confirm</button>
+                <button className='w-full text-white font-semibold p-2 bg-[#3e8670] rounded-lg'>Make a Payment</button>
             </div>
         </div>
     )
