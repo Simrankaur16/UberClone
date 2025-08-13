@@ -158,7 +158,7 @@ const CaptianHome = () => {
 
         </div>
         <div ref={confirmRidePopupPanelRef} className='fixed h-screen translate-y-full w-full z-10 bottom-0  bg-white px-3 py-10 pt-12'>
-          <ConfirmRidePopUp setConfirmRidePopupPanel={setConfirmRidePopupPanel} setridePopupPanel={setridePopupPanel} />
+          <ConfirmRidePopUp ride={ride}  setConfirmRidePopupPanel={setConfirmRidePopupPanel} setridePopupPanel={setridePopupPanel} />
            
         </div>
 
