@@ -8,10 +8,10 @@ const ConfirmRidePopUp = (props) => {
     const [otp, setotp] = useState('')
     const navigate = useNavigate()
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault()
 
-        const response = axios.get(`${import.meta.env.VITE_BASE_URL}/rides/start-ride`, {   
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/rides/start-ride`, {   
             params: {
                 rideId: props.ride._id,
                 otp: otp
@@ -83,7 +83,7 @@ const ConfirmRidePopUp = (props) => {
 
                     <form onSubmit={submitHandler} className='space-y-2' >
 
-                        <input value={otp} onChange={(e)=>setotp(e.target.value)} type="text" className='bg-[#e2e2e2] w-full flex justify-center text-center font-semibold p-2  rounded-lg' placeholder='Enter OTP' />
+                        <input value={otp} onChange={(e) => setotp(e.target.value)} type="text" className='bg-[#e2e2e2] w-full flex justify-center text-center font-semibold p-2  rounded-lg' placeholder='Enter OTP' />
                         <button className='w-full flex justify-center text-white font-semibold p-2 bg-[#3e8670] rounded-lg'>Confirm</button>
 
                         <button onClick={() => {
@@ -103,4 +103,4 @@ const ConfirmRidePopUp = (props) => {
     )
 }
 
-export default ConfirmRidePopUp
+export default ConfirmRidePopUp;
