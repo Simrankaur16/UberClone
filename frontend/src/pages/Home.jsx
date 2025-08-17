@@ -12,6 +12,7 @@ import {SocketContext} from '../context/SocketContext'
 import { UserDataContext } from '../context/UserContext'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import LiveTracking from '../components/LiveTracking'
 
 
 
@@ -244,7 +245,7 @@ async function createRide(){
 
       <div onClick={()=>{setvehiclePanel(false)}} className='h-screen w-screen'>
         {/* image for temp React.useState(); */}
-        <img className='h-full w-full object-cover' src='https://s.wsj.net/public/resources/images/BN-XR452_201802_M_20180228165525.gif'/>
+        <LiveTracking />
       </div>
 
       <div className='  flex flex-col justify-end h-screen  absolute top-0 w-full '>
