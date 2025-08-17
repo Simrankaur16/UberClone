@@ -16,7 +16,7 @@ function connectToDB() {
     
    }
     
-   // connection
+   
    
     
 
