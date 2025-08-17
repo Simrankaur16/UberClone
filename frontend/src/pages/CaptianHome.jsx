@@ -8,6 +8,7 @@ import ConfirmRidePopUp from '../components/ConfirmRidePopUp'
 import {SocketContext} from '../context/SocketContext.jsx'
 import { CaptainDataContext } from '../context/CaptainContext.jsx'
 import axios from 'axios'
+import LiveTracking from '../components/LiveTracking.jsx'
 
 
 const CaptianHome = () => {
@@ -140,7 +141,7 @@ const CaptianHome = () => {
 
 
         <div className='h-3/5'>
-          <img className='h-full w-full object-cover' src="https://s.wsj.net/public/resources/images/BN-XR452_201802_M_20180228165525.gif" />
+          <LiveTracking/>
 
         </div>
 

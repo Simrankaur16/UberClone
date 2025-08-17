@@ -4,6 +4,7 @@ import {useEffect} from 'react'
 import { useContext } from 'react';
 import { SocketContext } from '../context/SocketContext';
 import { useNavigate } from 'react-router-dom';
+import LiveTracking from '../components/LiveTracking';
 
 const Rinding = () => {
 
@@ -23,7 +24,7 @@ const Rinding = () => {
             </Link>
                        
             <div className='h-1/2 '>
-                <img className='h-full w-full object-cover' src="https://s.wsj.net/public/resources/images/BN-XR452_201802_M_20180228165525.gif" />
+                <LiveTracking/>
 
             </div>
 

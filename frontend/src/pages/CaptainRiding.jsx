@@ -3,6 +3,7 @@ import {Link, useLocation } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import FinishRide from '../components/FinishRide'
+import LiveTracking from '../components/LiveTracking'
 
 
 const CaptainRiding = () => {
@@ -41,7 +42,7 @@ const CaptainRiding = () => {
 
 
         <div className='h-4/5'>
-          <img className='h-full w-full object-cover' src="https://s.wsj.net/public/resources/images/BN-XR452_201802_M_20180228165525.gif" />
+          <LiveTracking/>
 
         </div>
 
