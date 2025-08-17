@@ -38,6 +38,7 @@ const Home = () => {
     const [fare, setfare] = useState({})
     const [vehicleType, setVehicleType] = useState(null);
     const [ride , setRide] = useState(null);
+   
     const navigate = useNavigate();
 
     const {socket} = useContext(SocketContext);
@@ -65,10 +66,11 @@ const Home = () => {
     })
 
 
-    socket.on('ride-started', (ride) => {
+    socket.on('ride-started', ride => {
 
+      console.log('Ride started:', ride);
       setWaitingForDriver(false);
-      navigate('/riding')
+      navigate('/riding', {state: {ride}});
 
     })
 
