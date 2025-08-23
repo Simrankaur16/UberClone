@@ -4,7 +4,7 @@ function connectToDB() {
     try{
 
     
-    mongoose.connect(process.env.DB_CONNECT);
+    mongoose.connect(process.env.URI);
           
     console.log('Connected to DB')
 
