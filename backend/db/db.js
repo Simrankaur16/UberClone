@@ -5,6 +5,7 @@ function connectToDB() {
 
     
     mongoose.connect(process.env.URI);
+    console.log(process.env.URI);
           
     console.log('Connected to DB')
 
