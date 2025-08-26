@@ -10,7 +10,11 @@ const mapsRoutes = require('./routes/maps.route');
 const rideRoutes = require('./routes/ride.route');
 
 connectToDB()
-app.use(cors());
+app.use(cors({
+  origin: "https://startling-griffin-0307e9.netlify.app", 
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
