@@ -241,7 +241,7 @@ async function createRide(){
 
   return (
     <div className='h-screen relative overflow-hidden'>
-      <img className='w-16 absolute left-5 top-5 z-10' src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Uber_logo_2018.svg/2560px-Uber_logo_2018.svg.png'/>
+      <img className='w-16 absolute left-5 top-5 ' src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Uber_logo_2018.svg/2560px-Uber_logo_2018.svg.png'/>
 
       <div onClick={()=>{setvehiclePanel(false)}} className='h-screen w-screen'>
         {/* image for temp React.useState(); */}

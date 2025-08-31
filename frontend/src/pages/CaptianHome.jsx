@@ -130,7 +130,7 @@ const CaptianHome = () => {
     <div>
       <div className='h-screen'>
         <div className='fixed p-3 top-0 flex items-center justify-between w-full'>
-          <img className='w-16 z-10' src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Uber_logo_2018.svg/2560px-Uber_logo_2018.svg.png' alt="logo" />
+          <img className='w-16 ' src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Uber_logo_2018.svg/2560px-Uber_logo_2018.svg.png' alt="logo" />
           <Link to="/home" className='z-10 h-10 w-10 bg-white flex items-center justify-center rounded-full'>
             <i className=" text-lg font-medium ri-logout-box-r-line"></i>
           </Link>
