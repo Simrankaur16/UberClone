@@ -12,12 +12,12 @@ const rideRoutes = require('./routes/ride.route');
 
 connectToDB()
 app.use(cors({
-  origin: "https://startling-griffin-0307e9.netlify.app", 
+  origin: "https://ubercl.netlify.app/", 
   methods: ["GET", "POST", "PUT", "DELETE","OPTIONS"],
   credentials: true
 }));
 
-app.use(express.json());
+app.use(express.json());d
 app.use(express.urlencoded({extended:true}))
 
 app.use(cookieParser());
