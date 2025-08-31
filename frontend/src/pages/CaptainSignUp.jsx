@@ -98,14 +98,19 @@ const CaptainSignUp = () => {
 
         <h3 className='text-lg font-medium mb-2'>Enter Password</h3>
         <input
-            className='bg-[#eeeeee] mb-6 rounded px-4 py-2 w-full text-medium placeholder:text-medium'
+            className='bg-[#eeeeee] mb-1 rounded px-4 py-2 w-full text-medium placeholder:text-medium'
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password" 
             required/> 
+        {password.length > 0 && password.length <= 6 && (
+            <span className='p-5' style={{ color: '#B22222', fontSize: '0.8em' }}>
+              Password must be more than 6 characters
+            </span>
+          )}
 
-          <h3 className='text-lg font-medium mb-2'>Vehicle Information</h3>
+          <h3 className='text-lg font-medium mt-2 mb-2'>Vehicle Information</h3>
           <div className='flex gap-4 mb-6'>
             <input
               className='bg-[#eeeeee] rounded px-4 py-2 w-1/2 text-medium placeholder:text-medium'
