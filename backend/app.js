@@ -12,7 +12,8 @@ const rideRoutes = require('./routes/ride.route');
 
 connectToDB()
 app.use(cors({
-  origin: "https://ubercl.netlify.app", 
+  origin: "http://localhost:5173",
+  // origin: "https://ubercl.netlify.app", 
   methods: ["GET", "POST", "PUT", "DELETE","OPTIONS"],
   credentials: true
 }));
